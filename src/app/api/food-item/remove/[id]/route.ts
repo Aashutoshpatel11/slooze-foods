@@ -3,14 +3,13 @@ import { FoodItem } from "@/model/foodItem.model";
 import connectDB from "@/utils/connectDB";
 
 export async function DELETE(
-  request: Request, 
-  context: any,
+  request: Request,
   { params }: { params: { id: string }, }
 ){
     await connectDB()
-    const id = params?.id
+    const resolvedParams = await params;
+    const id = resolvedParams.id;
     try {
-        console.log("CONTEXT", context);
         
         console.log("ID:", id);
         
@@ -32,7 +31,7 @@ export async function DELETE(
         return Response.json(
                 {
                     data: existingFoodItem,
-                    message:"Food item created successfully",
+                    message:"Food item deleted successfully",
                     success: true
                 },
                 {
