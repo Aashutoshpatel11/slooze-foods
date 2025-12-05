@@ -1,5 +1,6 @@
-import { Document, Schema } from "mongoose";
+import { Document, ObjectId, Schema, Types } from "mongoose";
 import mongoose from "mongoose";
+import { FoodItem } from "./foodItem.model";
 
 export interface userInterface extends Document{
     fullname: string,
@@ -7,7 +8,8 @@ export interface userInterface extends Document{
     password: string,
     role: string,
     country: string,
-    token: String
+    token: String,
+    cart: Types.ObjectId[]
 }
 
 const userSchema:Schema<userInterface> = new Schema({
@@ -35,7 +37,13 @@ const userSchema:Schema<userInterface> = new Schema({
     },
     token: {
         type: String,
-    }
+    },
+    cart: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'FoodItem'
+        }
+    ]
     
 })  
 

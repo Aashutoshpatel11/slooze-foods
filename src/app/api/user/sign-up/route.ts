@@ -6,6 +6,9 @@ export async function POST(request: Request) {
     await connectDB()
     try {
         const {fullname, email, password, country, role} = await request.json()
+
+        console.log(fullname, email, password, country, role);
+        
     
         if( !fullname || !email || !password || !country ){
             return Response.json(
@@ -15,7 +18,7 @@ export async function POST(request: Request) {
                 success: false
             },
             {
-                status: 400
+                status: 401
             }
             )
         }
@@ -29,12 +32,12 @@ export async function POST(request: Request) {
                 success: false
             },
             {
-                status: 400
+                status: 401
             }
         )
         }
     
-        if( role != "ADMIN" && "MANAGER" && "MEMBER"){
+        if( role != "ADMIN" && role != "MANAGER" && role != "MEMBER"){
             return Response.json(
             {
                 data: {},
@@ -42,7 +45,7 @@ export async function POST(request: Request) {
                 success: false
             },
             {
-                status: 400
+                status: 402
             }
             )
         }
