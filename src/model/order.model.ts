@@ -26,8 +26,8 @@ const orderSchema:Schema<orderInterface> = new Schema({
     },
     paymentMethod: {
         type: String,
-        enum: ["CASH ON DELIVERY", "DEBIT CARD", "CREDIT CARD", "UPI"],
-        default: "CASH ON DELIVERY"
+        enum: ["COD", "DEBIT", "CREDIT", "UPI"],
+        default: "COD"
     }
 
 })
