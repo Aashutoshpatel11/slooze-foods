@@ -2,6 +2,12 @@
 
 Slooze Foods is a full-stack food ordering application built with Next.js. It features multi-region support (India/America), role-based user access (Admin, Manager, Member), cart management, and a complete order processing workflow.
 
+## 🔗 Repository & Demo
+
+* **Git Repository:** [https://github.com/aashutoshpatel11/slooze-foods](https://github.com/aashutoshpatel11/slooze-foods)
+* **Website Link:**[https://slooze-foods.vercel.app/](https://slooze-foods.vercel.app/)
+* **Demo Video:** [Link to your Demo Video or Deployed App Here]
+
 ## 📋 Table of Contents
 - [Getting Started](#-getting-started)
 - [Prerequisites](#-prerequisites)
@@ -130,10 +136,5 @@ The application uses MongoDB. Below are the Mongoose schemas used:
 * **country:** String (Enum: "INDIA", "AMERICA")
 * **isplaced:** Boolean (Default: false)
 * **paymentMethod:** String (Enum: "COD", "DEBIT", "CREDIT", "UPI", Default: "COD")
-
-## 🔗 Repository & Demo
-
-* **Git Repository:** [https://github.com/aashutoshpatel11/slooze-foods](https://github.com/aashutoshpatel11/slooze-foods)
-* **Live Deployment / Demo Video:** [Link to your Demo Video or Deployed App Here]
 
 ---
