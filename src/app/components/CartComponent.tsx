@@ -1,11 +1,14 @@
+'use client'
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 function CartComponent({setShowCart}:any, ) {
 
   const user = useSelector((state:any) => state.auth.userData)
+  const [placingOrder, setPlacingOrder] = useState(false)
   const [cartItems, setCartitems] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
 
@@ -18,6 +21,9 @@ function CartComponent({setShowCart}:any, ) {
       res.data.data.cart.map( (item:any) => {
         setTotalPrice( prev => prev=prev+item.price )
       } )
+      if(res.data.data.cart.length == 0){
+        setPlacingOrder(true)
+      }
     } catch (error:any) {
       console.log("ERROR FETCHING CART ITEMS::", error);
       throw new Error(error)
@@ -26,6 +32,7 @@ function CartComponent({setShowCart}:any, ) {
 
   const placeOrder = async() => {
     try {
+      setPlacingOrder(true)
       const res = await axios.post(`http://localhost:3000/api/order/create`, {country: user.country})
       
       if(res.data.success){
@@ -42,13 +49,16 @@ function CartComponent({setShowCart}:any, ) {
           console.log("CART IS EMPTY", emptyCartResponse);
           getUserCartItems()
           setTotalPrice(0)
+          toast.success("Order placed")
         }
       }
 
-      console.log("placeOrderRes", placeOrderRes);
+      // console.log("placeOrderRes", placeOrderRes);
       
       return placeOrderRes
     } catch (error:any) {
+      toast.error("Order not placed")
+      setPlacingOrder(true)
       console.log("ERROR PLACING ORDER::", error);
       throw new Error(error)
     }
@@ -96,9 +106,12 @@ function CartComponent({setShowCart}:any, ) {
             <button
             onClick={ () => setShowCart(false)}
             className="btn btn-soft text-md">close</button>
-            <button
-            onClick={ () => placeOrder() }
-            className="btn btn-success text-md">Place Order</button>
+            {
+              user.role != "MEMBER" && <button
+              onClick={ () => placeOrder() }
+              disabled={placingOrder}
+              className="btn btn-success text-md">Place Order</button>
+            }
           </div>
         </div>
 

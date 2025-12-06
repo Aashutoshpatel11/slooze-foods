@@ -9,7 +9,7 @@ export async function POST(request:Request){
     const cookieStore = await cookies()
     await connectDB()
     try {
-        const {email, password} = await request.json()
+        const {email, password, country} = await request.json()
 
         if(!email || !password){
             return Response.json(
@@ -22,7 +22,7 @@ export async function POST(request:Request){
             )
         }
 
-        const existingUser = await User.findOne({email}).select('-password')
+        const existingUser = await User.findOne({email, country}).select('-password')
 
         if(!existingUser){
             return Response.json(
@@ -48,7 +48,7 @@ export async function POST(request:Request){
             )
         }
 
-        const token = jwt.sign({...existingUser}, process.env.JWT_KEY!, {expiresIn: '1d' } )
+        const token = jwt.sign({...existingUser}, process.env.JWT_KEY!, {expiresIn: '1h' } )
 
         cookieStore.set('token', token, {httpOnly:true, secure: true} )
 

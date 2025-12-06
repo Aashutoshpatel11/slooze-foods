@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import getPrevPath from '@/utils/getPrevPath'
 import Link from 'next/link'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 type Inputs = {
@@ -36,6 +37,7 @@ function page({params,}: {params: Promise<{ region: string }>}) {
       }
       return response
     } catch (error:any) {
+      toast.error( "Please fill up all details" )
       setSigningUp(false)
       throw new Error(error)
     }
@@ -77,6 +79,7 @@ function page({params,}: {params: Promise<{ region: string }>}) {
 
             </fieldset>
           </form>
+          <Toaster />
     </div>
   )
 }

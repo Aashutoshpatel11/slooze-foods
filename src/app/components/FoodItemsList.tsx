@@ -2,6 +2,7 @@
 import axios, { Axios } from 'axios';
 import React, {  useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form"
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
 type Inputs = {
@@ -43,6 +44,7 @@ function FoodItemsList() {
             if( res.data.success ){
                 getAllFoodItems()
                 setDisplayForm(false)
+                toast.success("Food item added")
             }
         } catch (error:any) {
             console.log("ERROR ADDING FOOD ITEM::", error);
@@ -53,7 +55,9 @@ function FoodItemsList() {
     const addItemToCart = async (itemId:string) => {
         try {
             const res = await axios.post(`http://localhost:3000/api/food-item/add-to-cart/${user._id}=${itemId}`)
-            
+            if(res.data.success){
+                toast.success("Added to cart")
+            }
         } catch (error:any) {
             console.log("ADD ITEM TO CART ERROR::", error);
             throw new Error(error)
