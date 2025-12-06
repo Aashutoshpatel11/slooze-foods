@@ -14,7 +14,7 @@ function CartComponent({setShowCart}:any, ) {
 
   const getUserCartItems = async() => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/user/cart/${user._id}`)
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/api/user/cart/${user._id}`)
       if(res.data.success){
         setCartitems(res.data.data.cart)
       }
@@ -33,18 +33,18 @@ function CartComponent({setShowCart}:any, ) {
   const placeOrder = async() => {
     try {
       setPlacingOrder(true)
-      const res = await axios.post(`http://localhost:3000/api/order/create`, {country: user.country})
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/create`, {country: user.country})
       
       if(res.data.success){
         cartItems.map(async(item)=>{
-          const addItemResponse = await axios.post(`http://localhost:3000/api/order/add/${res.data.data._id}=${item._id}`)
+          const addItemResponse = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/add/${res.data.data._id}=${item._id}`)
         })
       }
 
-      const placeOrderRes = await axios.post(`http://localhost:3000/api/order/place/${res.data.data._id}`, {country: user.country})
+      const placeOrderRes = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/place/${res.data.data._id}`, {country: user.country})
 
       if( placeOrderRes.data.success ){
-        const emptyCartResponse = await axios.get(`http://localhost:3000/api/user/make-cart-empy/${user._id}`)
+        const emptyCartResponse = await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/api/user/make-cart-empy/${user._id}`)
         if( emptyCartResponse.data.success ){
           console.log("CART IS EMPTY", emptyCartResponse);
           getUserCartItems()
@@ -52,9 +52,6 @@ function CartComponent({setShowCart}:any, ) {
           toast.success("Order placed")
         }
       }
-
-      // console.log("placeOrderRes", placeOrderRes);
-      
       return placeOrderRes
     } catch (error:any) {
       toast.error("Order not placed")

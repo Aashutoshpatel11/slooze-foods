@@ -33,7 +33,7 @@ function page() {
         setSigningIn(true)
         data.country = country
         try {
-            const response = await axios.post(`http://localhost:3000/api/user/sign-in`, data)
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/user/sign-in`, data)
                 if( response.data.success ){
                     dispatch(login({userData: response.data.data}))
                     router.push(`${prevPath}dashboard`)

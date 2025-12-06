@@ -14,11 +14,11 @@ import axios from 'axios'
     const handleRegionSelection = async(e:any) => {
         console.log(e.target.value)
         dispatch(add({country: e.target.value}))
-        route.push(`/region/${e.target.value}/sign-up`)
+        route.push(`/region/${e.target.value}/sign-in`)
     }
     const getCurrentUser = async()=>{
         try {
-            const response = await axios.get("http://localhost:3000/api/user/current-user")
+            const response = await axios.get(`${process.env.SERVER_URL}/api/user/current-user`)
             if(response.data.success){
                 dispatch(login({userData: response.data.data._doc}))
                 console.log("USERSTOREDDATA::", response.data.data._doc);

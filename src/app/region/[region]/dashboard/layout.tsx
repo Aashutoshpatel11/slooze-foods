@@ -25,7 +25,7 @@ export default function DashboardLayout({
 
   const getCurrentUser = async()=>{
       try {
-          const response = await axios.get("http://localhost:3000/api/user/current-user")
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/api/user/current-user`)
           if(response.data.success){
               dispatch(login({userData: response.data.data._doc}))
           }
@@ -41,7 +41,8 @@ export default function DashboardLayout({
 
     const handleLogout = async() => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/user/log-out`)
+        console.log( "URI", process.env.NEXT_PUBLIC_SERVER )
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/api/user/log-out`)
         if(res.data.success){
           dispatch(logout())
           route.push('/region')

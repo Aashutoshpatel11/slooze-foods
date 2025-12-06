@@ -21,7 +21,7 @@ function FoodItemsList() {
 
     const getAllFoodItems = async() => {
         try {
-            const res = await axios.post(`http://localhost:3000/api/food-item/get-all`, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/food-item/get-all`, {
                 country: user?.country
             })
             if( res.data.success ){
@@ -40,7 +40,7 @@ function FoodItemsList() {
     const onSubmit = async (data:Inputs) => {
         try {
             data.country = user.country
-            const res = await axios.post(`http://localhost:3000/api/food-item/add`, data)
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/food-item/add`, data)
             if( res.data.success ){
                 getAllFoodItems()
                 setDisplayForm(false)
@@ -54,7 +54,7 @@ function FoodItemsList() {
 
     const addItemToCart = async (itemId:string) => {
         try {
-            const res = await axios.post(`http://localhost:3000/api/food-item/add-to-cart/${user._id}=${itemId}`)
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/food-item/add-to-cart/${user._id}=${itemId}`)
             if(res.data.success){
                 toast.success("Added to cart")
             }

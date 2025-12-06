@@ -13,7 +13,7 @@ function OrderComponent({setShowOrders}:any) {
 
   const getOrders = async () => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/order/get`, {country: user.country})
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/get`, {country: user.country})
       if(res.data.success){
         setOrders(res.data.data)
       }
@@ -29,7 +29,7 @@ function OrderComponent({setShowOrders}:any) {
 
   const handleEdit = async(id:string, payment:string, setIsDisabled:any) => {
     try {
-        const res = await axios.post(`http://localhost:3000/api/order/place/${id}`, {paymentMethod: payment})
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/place/${id}`, {paymentMethod: payment})
         if(res.data.success){
           setIsDisabled(true)
           getOrders()
@@ -42,7 +42,7 @@ function OrderComponent({setShowOrders}:any) {
 
   const handleCancelOrder = async(id:string) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/api/order/cancel/${id}`)
+      const res = await axios.delete(`${process.env.NEXT_PUBLIC_SERVER}/api/order/cancel/${id}`)
       if(res.data.success){
         getOrders()
         toast.success("Order cancelled")

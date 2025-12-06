@@ -31,7 +31,7 @@ function page({params,}: {params: Promise<{ region: string }>}) {
     data.role = data.role.toUpperCase()
     
     try {
-      const response = await axios.post(`http://localhost:3000/api/user/sign-up`, data)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/user/sign-up`, data)
       if( response.data.success ){
         router.push(`${prevPath}sign-in`)
       }
