@@ -36,7 +36,7 @@ function CartComponent({setShowCart}:any, ) {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/create`, {country: user.country})
       
       if(res.data.success){
-        cartItems.map(async(item)=>{
+        cartItems.map(async(item:any)=>{
           const addItemResponse = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/add/${res.data.data._id}=${item._id}`)
         })
       }
