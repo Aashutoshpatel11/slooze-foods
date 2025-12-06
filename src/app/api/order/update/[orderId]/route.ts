@@ -2,11 +2,10 @@ import { Order } from "@/model/order.model"
 import mongoose from "mongoose"
 import connectDB from "@/utils/connectDB"
 
-export async function PATCH(request: Request, { params }:{ params : {orderId: string}}){
+export async function PATCH(request: Request, { params }: { params: Promise<{ orderId: string }> }){
     await connectDB()
     try {
-        const resolvedParams = await params
-        const orderId = params.orderId
+        const {orderId} = await params
         const {paymentMethod} = await request.json()
 
         const order = await Order.findByIdAndUpdate(orderId, {paymentMethod: paymentMethod})

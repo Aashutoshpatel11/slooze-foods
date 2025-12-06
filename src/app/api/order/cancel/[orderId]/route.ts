@@ -3,14 +3,13 @@ import connectDB from "@/utils/connectDB";
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   console.log("DELETING ORDER...");
   await connectDB();
 
   try {
-    const resolvedParams = await params;
-    const {orderId} = resolvedParams
+    const {orderId} = await params;
     console.log("Order ID:", orderId);
 
     const order = await Order.findByIdAndDelete(orderId);

@@ -3,12 +3,11 @@ import { FoodItem } from "@/model/foodItem.model";
 import mongoose from "mongoose"; 
 import connectDB from "@/utils/connectDB";
 
-export async function POST(request: Request,{params}: {params:{orderId: string}}) {
+export async function POST(request: Request,{ params }: { params: Promise<{ orderId: string }> }) {
     await connectDB()
     
     try {
-        const resolvedParams = await params
-        const orderId = resolvedParams.orderId
+        const {orderId} = await params
 
         const {paymentMethod} = await request.json()
 

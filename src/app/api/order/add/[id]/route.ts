@@ -4,14 +4,14 @@ import { Order } from "@/model/order.model";
 
 export async function POST(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ){
     await connectDB()
     try {
-        const resolvedParams = await params;
-        const id = resolvedParams.id.split('=')
-        const orderId = id[0];
-        const itemId = id[1]
+        const {id} = await params;
+        const splitId = id.split('=')
+        const orderId = splitId[0];
+        const itemId = splitId[1]
     
         const order = await Order.findById(orderId)
     

@@ -4,11 +4,10 @@ import connectDB from "@/utils/connectDB";
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string }, }
+  { params }: { params: Promise<{ id: string }> }
 ){
     await connectDB()
-    const resolvedParams = await params;
-    const id = resolvedParams.id;
+    const {id} = await params;
     try {
         
         console.log("ID:", id);

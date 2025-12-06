@@ -2,11 +2,10 @@ import mongoose from "mongoose";
 import { User } from "@/model/user.model";
 import connectDB from "@/utils/connectDB";
 
-export async function GET(request:Request,  {params}: {params: {userId: string}} ){
+export async function GET(request:Request,  { params }: { params: Promise<{ userId: string }> } ){
     await connectDB()
     try {
-        const resolvedParams = await params
-        const {userId} = resolvedParams
+        const {userId} = await params
 
         const user = await User.findById(userId).select('-paasword -token').populate('cart')
         if(!user){
