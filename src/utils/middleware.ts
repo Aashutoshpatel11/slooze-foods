@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
  
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const cookieStore = await cookies()
     const url = request.nextUrl.pathname;
     const token = cookieStore.get('token')
