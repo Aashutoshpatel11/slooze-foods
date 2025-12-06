@@ -13,6 +13,7 @@ function CartComponent({setShowCart}:any, ) {
   const [totalPrice, setTotalPrice] = useState(0)
 
   const getUserCartItems = async() => {
+    setTotalPrice(0)
     try {
       const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/api/user/cart/${user._id}`)
       if(res.data.success){
@@ -96,7 +97,7 @@ function CartComponent({setShowCart}:any, ) {
         <div>
           <div className="flex justify-between items-center text-md font-semibold mb-4">
             <span>Total Amount</span>
-            <span>{totalPrice/2}</span>
+            <span>{totalPrice}</span>
           </div>
 
           <div className='flex justify-between' >
