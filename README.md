@@ -6,7 +6,7 @@ Slooze Foods is a full-stack food ordering application built with Next.js. It fe
 
 * **Git Repository:** [https://github.com/aashutoshpatel11/slooze-foods](https://github.com/aashutoshpatel11/slooze-foods)
 * **Website Link:**[https://slooze-foods.vercel.app/](https://slooze-foods.vercel.app/)
-* **Demo Video:** [Link to your Demo Video or Deployed App Here]
+* **Demo Video:** [Google Drive](https://drive.google.com/file/d/1Y0n-7FzGtGP2e0mYKmCwPRdYXPFr-g7N/view?usp=drive_link) / [One Drive](https://1drv.ms/v/c/dd9a4bb8242e46dc/IQBbzRSa-Q7-Q5o6GHVGf1hiAWLWvJ3eAJIKdOYkfJdtpCw?e=g1z3j9)
 
 ## 📋 Table of Contents
 - [Getting Started](#-getting-started)
