@@ -3,11 +3,10 @@ import connectDB from "@/utils/connectDB";
 import { FoodItem } from "@/model/foodItem.model";
 import { User } from "@/model/user.model";
 
-export async function POST(request: Request, {params}: {params: { ids: string } }){
+export async function POST(request: Request, context: {params: { ids: string } }){
     await connectDB()
     try {
-        const resolvedParams = await params;
-        const {ids} = resolvedParams
+        const {ids} = context.params
         const splitedId = ids.split('=')
         const userId = splitedId[0]
         const foodItemId = splitedId[1]
