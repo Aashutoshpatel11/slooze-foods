@@ -29,7 +29,7 @@ function OrderComponent({setShowOrders}:any) {
 
   const handleEdit = async(id:string, payment:string, setIsDisabled:any) => {
     try {
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/order/place/${id}`, {paymentMethod: payment})
+        const res = await axios.patch(`${process.env.NEXT_PUBLIC_SERVER}/api/order/update/${id}`, {paymentMethod: payment})
         if(res.data.success){
           setIsDisabled(true)
           getOrders()
