@@ -54,12 +54,25 @@ function FoodItemsList() {
 
     const addItemToCart = async (itemId:string) => {
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/food-item/add-to-cart/${user._id}=${itemId}`)
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/api/food-item/add-to-cart/${itemId}`, {userId: user._id})
             if(res.data.success){
                 toast.success("Added to cart")
             }
         } catch (error:any) {
             console.log("ADD ITEM TO CART ERROR::", error);
+            throw new Error(error)
+        }
+    }
+
+    const handleDeleteFoodItem = async (itemId:string) => {
+        try {
+            const res = await axios.delete(`${process.env.NEXT_PUBLIC_SERVER}/api/food-item/remove/${itemId}`)
+            if(res.data.success){
+                getAllFoodItems()
+                toast.success(`Item deleted`)
+            }
+        } catch (error:any) {
+            console.log("ERROR DELETING FOOD ITEM::", error)
             throw new Error(error)
         }
     }
@@ -90,7 +103,8 @@ function FoodItemsList() {
                                 <span className="text-lg md:text-xl font-medium">{item?.name}</span>
                                 <div className="flex items-center gap-2">
                                     <span>{`Price: ${item.price}`}</span>
-                                    <button onClick={ () => addItemToCart(item._id) } className="btn btn-sm btn-square btn-ghost border border-base-300">+</button>
+                                    <button onClick={ () => addItemToCart(item._id) } className="btn btn-sm btn-info">Add to cart</button>
+                                    <button onClick={ () => handleDeleteFoodItem(item._id) }  className='btn btn-error btn-sm' >Delete</button>
                                 </div>
                             </div>
                         </li>
