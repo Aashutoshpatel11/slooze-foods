@@ -82,7 +82,7 @@ Ensure you have the following installed on your system:
 * **Cart System:** Users can add/remove items and view their total before placing an order.
 * **Order Management:** Create, Place, Update (Payment Method), and Cancel orders.
 
-## 📡 API Collection
+## 藤 API Collection
 
 The application exposes the following RESTful API endpoints located in `src/app/api`:
 
@@ -101,7 +101,7 @@ The application exposes the following RESTful API endpoints located in `src/app/
 | :--- | :--- | :--- | :--- |
 | `POST` | `/api/food-item/get-all` | Fetch items by region | `{ country }` |
 | `POST` | `/api/food-item/add` | Create new food item | `{ name, price, country }` |
-| `POST` | `/api/food-item/add-to-cart/[ids]` | Add item to user cart | `ids` format: `userId=foodItemId` |
+| `POST` | `/api/food-item/add-to-cart/[itemId]` | Add item to user cart | `itemId` (URL param), Body: `{ userId }` |
 | `DELETE` | `/api/food-item/remove/[id]` | Delete a food item | `id` (URL param) |
 
 ### Order APIs
